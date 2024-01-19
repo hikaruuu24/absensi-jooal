@@ -159,7 +159,7 @@ class UserController extends Controller
     {
         $validateData = $request->validate([
             'password' => 'required',
-            'new_password' => 'required|min:8',
+            'new_password' => 'required',
         ]);
 
         $user = User::findOrFail(Auth::user()->id);

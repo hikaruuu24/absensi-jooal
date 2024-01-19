@@ -82,7 +82,7 @@
               @if(auth()->user()->can('user-delete') || auth()->user()->can('user-edit'))
               <td>
                 <div class="btn-group">
-                  @if(auth()->user()->can('user-edit') && Auth::user()->id != $user->id)
+                  @if(auth()->user()->can('user-edit') && Auth::user()->id == $user->id)
                   <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning text-white">
                     <i class="far fa-edit"></i>
                     Edit
