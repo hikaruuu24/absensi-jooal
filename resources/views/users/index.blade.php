@@ -54,7 +54,6 @@
           </div>
         </div>
       </div>
-
       <div class="card-body">
         <table id="userTable" class="table d-none table-hover">
           <thead>
@@ -82,7 +81,7 @@
               @if(auth()->user()->can('user-delete') || auth()->user()->can('user-edit'))
               <td>
                 <div class="btn-group">
-                  @if(auth()->user()->can('user-edit') && Auth::user()->id == $user->id)
+                  @if(Auth::user()->can('user-edit') && (Auth::user()->id == $user->id || Auth::user()->getRoleNames()[0]) == 'Admin')
                   <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning text-white">
                     <i class="far fa-edit"></i>
                     Edit
