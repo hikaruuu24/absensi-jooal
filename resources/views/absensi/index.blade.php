@@ -34,7 +34,7 @@
                     <a class="nav-link" id="v-laporan-aktifitas-tab" data-bs-toggle="pill" href="#v-pills-payment"
                         role="tab" aria-controls="v-pills-payment" aria-selected="false">
                         <i class="bx bxs-report d-block check-nav-icon mt-4 mb-2"></i>
-                        <p class="fw-bold mb-4">Laporan Aktifitas</p>
+                        <p class="fw-bold mb-4">Laporan Aktivitas</p>
                     </a>
                     <a class="nav-link d-none" id="v-rencana-aktifitas-tab" data-bs-toggle="pill" href="#v-pills-confir" role="tab"
                         aria-controls="v-pills-confir" aria-selected="false">
@@ -93,6 +93,25 @@
                                     
                                     <form action="{{route('absensi.store')}}" method="POST" enctype="multipart/form-data">
                                         @csrf
+                                        <div id="here-maps" class="form-group mb-3">
+                                            <label for="" class="form-lokasi">Pin Lokasi</label>
+                                            <div style="height: 21.5rem;" class="form-lokasi" id="mapContainer"></div>
+                                        </div>
+                                        <div class="form-group row mb-4">
+                                            <label for="billing-phone" class="col-md-2 col-form-label form-latitude">Latitude</label>
+                                            <div class="col-md-10">
+                                                <input type="number" readonly class="form-control form-latitude @error('latitude') is-invalid @enderror" id="latitude" name="latitude" step="any"
+                                                    placeholder="Masukan latitude">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row mb-4">
+                                            <label for="billing-address"
+                                                class="col-md-2 col-form-label form-longitude">Longitude</label>
+                                            <div class="col-md-10">
+                                                <input type="number" readonly class="form-control form-longitude @error('longitude') is-invalid @enderror" id="longitude" name="longitude" step="any"
+                                                    placeholder="Masukan longitude">
+                                            </div>
+                                        </div>
                                         <div class="form-group row mb-4">
                                             <label for="billing-name" class="col-md-2 col-form-label">Tipe Absen</label>
                                             <div class="col-md-10">
@@ -116,25 +135,7 @@
                                                 <input type="file" class="form-control form-foto @error('foto') is-invalid @enderror" name="foto" id="foto">
                                             </div>
                                         </div>
-                                        <div class="form-group row mb-4">
-                                            <label for="billing-phone" class="col-md-2 col-form-label form-latitude">Latitude</label>
-                                            <div class="col-md-10">
-                                                <input type="number" class="form-control form-latitude @error('latitude') is-invalid @enderror" id="latitude" name="latitude" step="any"
-                                                    placeholder="Masukan latitude">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row mb-4">
-                                            <label for="billing-address"
-                                                class="col-md-2 col-form-label form-longitude">Longitude</label>
-                                            <div class="col-md-10">
-                                                <input type="number" class="form-control form-longitude @error('longitude') is-invalid @enderror" id="longitude" name="longitude" step="any"
-                                                    placeholder="Masukan longitude">
-                                            </div>
-                                        </div>
-                                        <div id="here-maps" class="form-group mb-3">
-                                            <label for="" class="form-lokasi">Pin Lokasi</label>
-                                            <div style="height: 21.5rem;" class="form-lokasi" id="mapContainer"></div>
-                                        </div>
+                                        
                                         <div class="row mt-4">
                                             <div class="col-sm-6">
                                             </div> <!-- end col -->
@@ -151,7 +152,7 @@
                             <div class="tab-pane fade" id="v-pills-payment" role="tabpanel"
                                 aria-labelledby="v-pills-payment-tab">
                                 <div>
-                                    <h4 class="card-title">Laporan Aktifitas</h4>
+                                    <h4 class="card-title">Laporan Aktivitas</h4>
                                     <p class="card-title-desc">Isi informasi di bawah</p>
 
                                     <form action="{{route('laporan-aktifitas.store')}}" method="POST" enctype="multipart/form-data">
@@ -246,7 +247,17 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-bs-toggle="tab" href="#processing" role="tab">
-                                Laporan Aktifitas
+                                Laporan Aktivitas
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{(Auth::user()->getRoleNames()[0] != 'Admin') ? 'd-none' : ''}}" data-bs-toggle="tab" href="#list-absen" role="tab">
+                                Daftar Absensi Semua Pegawai
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{(Auth::user()->getRoleNames()[0] != 'Admin') ? 'd-none' : ''}}" data-bs-toggle="tab" href="#list-laporan-aktivitas" role="tab">
+                                Laporan Aktivitas Semua Pegawai
                             </a>
                         </li>
                     </ul>
@@ -337,6 +348,92 @@
                                                         <td><img src="{{asset('images/'. $data->foto)}}" class="img-fluid" style="max-width: 80px" alt=""></td>
                                                     </tr>
                                                     @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="list-absen" role="tabpanel">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="mt-4">
+                                        <div class="table-responsive">
+                                            <table id="daftarAbsensi" class="table table-hover dt-responsive nowrap"
+                                                style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Nama</th>
+                                                        <th>Tanggal</th>
+                                                        <th>Jam Masuk</th>
+                                                        <th>Jam Keluar</th>
+                                                        <th>Latitude</th>
+                                                        <th>Longitude</th>
+                                                        <th>Foto</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    @foreach ($absensi_all as $data)
+                                                    <tr>
+                                                        <td>{{$loop->iteration}}</td>
+                                                        <td>{{$data->user->name}}</td>
+                                                        <td>{{date('Y-m-d', strtotime($data->tanggal))}}</td>
+                                                        <td>{{$data->jam_masuk}}</td>
+                                                        <td>{{$data->jam_keluar}}</td>
+                                                        <td>{{$data->latitude}}</td>
+                                                        <td>{{$data->longitude}}</td>
+                                                        <td><img src="{{asset('images/'. $data->foto)}}" class="img-fluid" style="max-width: 80px" alt=""></td>
+                                                    </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="list-laporan-aktivitas" role="tabpanel">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="mt-4">
+                                        <div class="table-responsive">
+                                            <table id="daftarAktivitas" class="table table-hover dt-responsive nowrap"
+                                                style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Tanggal</th>
+                                                        <th>Nama Pegawai</th>
+                                                        <th>Nama Restoran</th>
+                                                        <th>Nomor HP</th>
+                                                        <th>Email</th>
+                                                        <th>Src. Hunting</th>
+                                                        <th>Whatsapp</th>
+                                                        <th>Respon</th>
+                                                        <th>Kebutuhan</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($laporan_aktifitas_all as $data)
+                                                        <tr>
+                                                            <td>{{$loop->iteration}}</td>
+                                                            <td>{{date('Y-m-d', strtotime($data->tanggal))}}</td>
+                                                            <td>{{$data->user->name}}</td>
+                                                            <td>{{$data->nama_perusahaan}}</td>
+                                                            <td>{{$data->nomor_hp}}</td>
+                                                            <td>{{$data->email}}</td>
+                                                            <td>{{$data->source_hunting}}</td>
+                                                            <td>{{$data->whatsapp}}</td>
+                                                            <td>{{$data->respon}}</td>
+                                                            <td>{{$data->kebutuhan}}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                    
                                                 </tbody>
                                             </table>
                                         </div>

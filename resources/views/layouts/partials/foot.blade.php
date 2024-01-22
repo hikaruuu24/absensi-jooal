@@ -50,6 +50,16 @@
             "ordering": true,
             "info":     true
         });
+        $('#daftarAbsensi').DataTable({
+            "paging":   true,
+            "ordering": true,
+            "info":     true
+        });
+        $('#daftarAktivitas').DataTable({
+            "paging":   true,
+            "ordering": true,
+            "info":     true
+        });
         
         $('#HistoryTable').DataTable({
             "paging":   true,

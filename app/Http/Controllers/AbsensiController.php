@@ -18,6 +18,7 @@ class AbsensiController extends Controller
         $data['page_title'] = "Absensi";
         $data['breadcumb'] = "Absensi";
         $data['absensi'] = Absensi::where('user_id', auth()->user()->id)->get();
+        $data['absensi_all'] = Absensi::orderBy('id', 'desc')->get();
 
         $today = date('Y-m-d');
         $lastAbsensi = Absensi::where('user_id', auth()->user()->id)->whereDate('tanggal', $today)->orderBy('id', 'desc')->first();
@@ -28,6 +29,7 @@ class AbsensiController extends Controller
         }
     
         $data['laporan_aktifitas'] = LaporanAktifitas::where('user_id', auth()->user()->id)->orderBy('id', 'desc')->get();
+        $data['laporan_aktifitas_all'] = LaporanAktifitas::orderBy('id', 'desc')->get();
         
 
 
