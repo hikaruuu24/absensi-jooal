@@ -28,6 +28,7 @@ class PermissionTableSeeder extends Seeder
             'history-log-list',
             'history-log-delete',
             'laporan-aktifitas-delete',
+            'master-laporan'
         ];
 
         foreach ($permissions as $permission) {

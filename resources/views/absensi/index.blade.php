@@ -473,6 +473,17 @@
             $('.form-foto').addClass('d-none')
             $('.form-latitude').addClass('d-none')
             $('.form-longitude').addClass('d-none')
+
+            axios.get('/get-laporan')
+            .then(function (response) {
+                // handle success
+                console.log(response);
+                
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
         }
     })
 
@@ -502,6 +513,10 @@
         $('.nav-link[href="#processing"]').addClass('active');
     })
 
+</script>
+
+<script>
+    
 </script>
 
 @endsection

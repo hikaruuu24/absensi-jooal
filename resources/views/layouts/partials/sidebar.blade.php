@@ -27,6 +27,13 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="{{ route('laporan-absensi.index') }}">
+                        <i class="bx bxs-report"></i>
+                        <span data-key="t-dashboard">Laporan</span>
+                    </a>
+                </li>
+
                 @if(auth()->user()->can('master-data'))
                 <li>
                     <a href="{{ route('master-data.index') }}">

@@ -18,10 +18,20 @@
 <!-- Custom File input -->
 <script src="{{ asset('plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
 <script src="{{ asset('js/datatables-checkboxes.js') }}"></script>
+<!-- bootstrap-datepicker js -->
+<script src="{{asset('backend/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}"></script>
 <!-- materialdesign icon js-->
 {{-- <script src="{{ asset('backend/js/pages/materialdesign.init.js') }}"></script> --}}
-
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{ asset('backend/js/app.js') }}"></script>
+<!-- DataTables Buttons JS -->
+<script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
+<!-- DataTables JSZip JS (for Excel) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
 <script>
 
     //-- Loader 
@@ -59,6 +69,15 @@
             "paging":   true,
             "ordering": true,
             "info":     true
+        });
+        $('#laporanAbsensi').DataTable({
+            "paging":   true,
+            "ordering": true,
+            "info":     true,
+            dom: 'Bfrtip',
+            buttons: [
+                'excel', 'pdf', 'print'
+            ],
         });
         
         $('#HistoryTable').DataTable({

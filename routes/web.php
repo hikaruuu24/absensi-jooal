@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HistoryLogController;
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\LaporanAktifitasController;
+use App\Http\Controllers\LaporanAbsensiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,7 +36,12 @@ Route::middleware('auth:web')->group(function () {
     Route::post('laporan-aktifitas', [LaporanAktifitasController::class, 'store'])->name('laporan-aktifitas.store');
     Route::delete('laporan-aktifitas/{id}', [LaporanAktifitasController::class, 'destroy'])->name('laporan-aktifitas.destroy');
     Route::patch('laporan-aktifitas/{id}', [LaporanAktifitasController::class, 'update'])->name('laporan-aktifitas.update');
+    Route::get('get-laporan', [LaporanAktifitasController::class, 'getLaporan'])->name('laporan.get-laporan');
 
+    Route::get('laporan-absensi', [LaporanAbsensiController::class, 'index'])->name('laporan-absensi.index');
+    Route::get('laporan-aktivitas', [LaporanAktifitasController::class, 'index'])->name('laporan-aktivitas.index');
+    Route::get('generate-laporan-absensi', [LaporanAbsensiController::class, 'generateLaporanAbsensi'])->name('generate-laporan-absensi.index');
+    Route::get('generate-laporan-aktivitas', [LaporanAktifitasController::class, 'generateLaporanAktivitas'])->name('generate-laporan-aktivitas.index');
     // Master Data
      Route::get('master-data', function () {
         $data['page_title'] = 'Master Data';

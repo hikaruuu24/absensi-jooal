@@ -5,12 +5,89 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\LaporanAktifitas;
 use App\Models\HistoryLog;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 
 class LaporanAktifitasController extends Controller
 {
+
+    public function getLaporan()
+    {
+        $laporan_aktivitas = LaporanAktifitas::where('user_id', auth()->user()->id)->get();
+        if ($laporan_aktivitas != null) {
+            return response()->json([
+                'status' => '200',
+                'data' => true
+            ]);
+        } else {
+            return response()->json([
+                'status' => '404',
+                'data' => false
+            ]);
+        }
+
+    }
+
+    public function generateLaporanAktivitas(Request $request)
+    {
+        $datepickerSelected = $request->datepickerSelect;
+        if ($datepickerSelected == 'tanggal') {
+            $daterange = 'tanggal';
+        } elseif ($datepickerSelected == 'bulan') {
+            $daterange = 'bulan';
+        } elseif ($datepickerSelected == 'tahun') {
+            $daterange = 'tahun';
+        } else {
+            $daterange = 'tanggal';
+        }
+
+        $dateWhere = $request->date;
+        $user = $request->pegawai;
+
+        if ($daterange == 'tanggal') {
+            $dateFrom = date('Y-m-d 00:00:00', strtotime($dateWhere));
+            $dateTo = date('Y-m-d 23:59:59', strtotime($dateWhere));
+            if ($user != null) {
+                $laporanAktivitas = LaporanAktifitas::where('user_id', $user)->whereBetween('created_at', [$dateFrom, $dateTo])->get();
+            } else {
+                $laporanAktivitas = LaporanAktifitas::whereBetween('created_at', [$dateFrom, $dateTo])->get();
+            }
+        } elseif ($daterange == 'bulan') {
+            $dateFrom = date('Y-m-01 00:00:00', strtotime($dateWhere));
+            $dateTo = date('Y-m-t 23:59:59', strtotime($dateWhere));
+            $laporanAktivitas = LaporanAktifitas::where('user_id', $user)->whereBetween('created_at', [$dateFrom, $dateTo])->get();
+        } elseif ($daterange == 'tahun') {
+            $dateFrom = date('Y-01-01 00:00:00', strtotime($dateWhere));
+            $dateTo = date('Y-12-31 23:59:59', strtotime($dateWhere));
+            $laporanAktivitas = LaporanAktifitas::where('user_id', $user)->whereBetween('created_at', [$dateFrom, $dateTo])->get();
+        } else {
+            $dateFrom = date('Y-m-d 00:00:00', strtotime($dateWhere));
+            $dateTo = date('Y-m-d 23:59:59', strtotime($dateWhere));
+            $laporanAktivitas = LaporanAktifitas::where('user_id', $user)->whereBetween('created_at', [$dateFrom, $dateTo])->get();
+        }
+
+        $data = [];
+        foreach ($laporanAktivitas as $key => $value) {
+            $data[$key]['tanggal'] = $value->tanggal;
+            $data[$key]['nama'] = $value->user->name;
+            $data[$key]['nama_perusahaan'] = $value->nama_perusahaan;
+            $data[$key]['nomor_hp'] = $value->nomor_hp;
+            $data[$key]['email'] = $value->email;
+            $data[$key]['source_hunting'] = $value->source_hunting;
+            $data[$key]['whatsapp'] = $value->whatsapp;
+            $data[$key]['respon'] = $value->respon;
+            $data[$key]['kebutuhan'] = $value->kebutuhan;
+        }
+        // returns api
+        return response()->json([
+            'success' => true,
+            'message' => 'Berhasil mengambil data absensi',
+            'data' => $data
+        ], 200);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +95,12 @@ class LaporanAktifitasController extends Controller
      */
     public function index()
     {
-        //
+    
+        $data['page_title'] = "Laporan Aktivitas";
+        $data['breadcumb'] = "Laporan Aktivitas";
+        $data['laporan_aktivitas'] = LaporanAktifitas::orderBy('id', 'desc')->get();
+        $data['users'] = User::orderBy('id', 'desc')->get();
+        return view('absensi.reports.report_aktivitas', $data);  
     }
 
     /**

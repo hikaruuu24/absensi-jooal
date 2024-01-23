@@ -36,6 +36,7 @@ class AbsensiController extends Controller
         return view('absensi.index', $data);
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
