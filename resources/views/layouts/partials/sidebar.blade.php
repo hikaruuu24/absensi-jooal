@@ -7,16 +7,17 @@
         <div id="sidebar-menu">
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
-                @if(auth()->user()->can('dashboard') || auth()->user()->can('master-data') || auth()->user()->can('history-log-list'))
+                @if(auth()->user()->can('dashboard') || auth()->user()->can('master-data') ||
+                auth()->user()->can('history-log-list'))
                 <li class="menu-title" key="t-menu">Menu</li>
                 @endif
 
                 {{-- @if(auth()->user()->can('dashboard'))
                 <li>
                     <a href="{{ route('dashboard.index') }}" class="waves-effect">
-                        <i class="fas fa-home"></i>
-                        <span key="t-dashboards">Dashboard</span>
-                    </a>
+                <i class="fas fa-home"></i>
+                <span key="t-dashboards">Dashboard</span>
+                </a>
                 </li>
                 @endif --}}
 
@@ -25,6 +26,18 @@
                         <i class="bx bx-dialpad-alt"></i>
                         <span data-key="t-dashboard">Absensi</span>
                     </a>
+                </li>
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bx-list-ul"></i>
+                        <span key="t-tables">Document Sales</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{route('quotation.index')}}" key="t-basic-tables">Quotation</a></li>
+                        <li><a href="tables-basic.html" key="t-basic-tables">Invoice</a></li>
+                        <li><a href="{{route('bank-account.index')}}" key="t-basic-tables">Bank Account</a></li>
+                    </ul>
                 </li>
 
                 <li>

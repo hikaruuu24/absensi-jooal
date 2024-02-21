@@ -100,7 +100,7 @@
                             </div>
 
                         <div class="table-responsive mt-2">
-                            <table class="table table-hover datatable dt-responsive nowrap" id="laporanAbsensi"
+                            <table class="table table-hover datatable dt-responsive nowrap" id="laporanAktivitas"
                                 style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead>
                                     <tr>

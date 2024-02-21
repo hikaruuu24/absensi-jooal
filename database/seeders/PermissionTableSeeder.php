@@ -15,20 +15,21 @@ class PermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
-            'dashboard',
-            'master-data',
-            'departement-list',
-            'departement-create',
-            'departement-edit',
-            'departement-delete',
-            'user-list',
-            'user-create',
-            'user-edit',
-            'user-delete',
-            'history-log-list',
-            'history-log-delete',
-            'laporan-aktifitas-delete',
-            'master-laporan'
+            // 'dashboard',
+            // 'master-data',
+            // 'departement-list',
+            // 'departement-create',
+            // 'departement-edit',
+            // 'departement-delete',
+            // 'user-list',
+            // 'user-create',
+            // 'user-edit',
+            // 'user-delete',
+            // 'history-log-list',
+            // 'history-log-delete',
+            // 'laporan-aktifitas-delete',
+            // 'master-laporan'
+            'document-sales'
         ];
 
         foreach ($permissions as $permission) {

@@ -141,7 +141,7 @@
                                             </div> <!-- end col -->
                                             <div class="col-sm-6">
                                                 <div class="text-end">
-                                                    <button {{$status == true ? 'disabled' : ''}} type="submit" class="btn btn-success">
+                                                    <button type="submit" class="btn btn-success">
                                                         <i class="mdi mdi-content-save me-1"></i> Save Changes</button>
                                                 </div>
                                             </div> <!-- end col -->
@@ -474,16 +474,6 @@
             $('.form-latitude').addClass('d-none')
             $('.form-longitude').addClass('d-none')
 
-            axios.get('/get-laporan')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-                
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            })
         }
     })
 

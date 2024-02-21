@@ -79,8 +79,22 @@
                 'excel', 'pdf', 'print'
             ],
         });
+        $('#laporanAktivitas').DataTable({
+            "paging":   true,
+            "ordering": true,
+            "info":     true,
+            dom: 'Bfrtip',
+            buttons: [
+                'excel', 'pdf', 'print'
+            ],
+        });
         
         $('#HistoryTable').DataTable({
+            "paging":   true,
+            "ordering": true,
+            "info":     true
+        });
+        $('#detailQuotation').DataTable({
             "paging":   true,
             "ordering": true,
             "info":     true

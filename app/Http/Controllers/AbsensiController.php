@@ -56,6 +56,8 @@ class AbsensiController extends Controller
     public function store(Request $request)
     {
         $lastAbsensi = Absensi::where('user_id', auth()->user()->id)->whereDate('tanggal', date('Y-m-d'))->orderBy('id', 'desc')->first();
+        $lastReport = LaporanAktifitas::where('user_id', auth()->user()->id)->whereDate('tanggal', date('Y-m-d'))->orderBy('id', 'desc')->first();
+        // check if las report null redirect back with message
         
         try {
             if ($lastAbsensi == null) {
@@ -81,6 +83,9 @@ class AbsensiController extends Controller
                     $absensi->foto = $name;
                 }
             } elseif ($lastAbsensi->jam_masuk =! null) {
+                if ($lastReport == null) {
+                    return redirect()->route('absensi.index')->with('error', 'Laporan Aktifitas belum diisi');
+                }
                 // edit last data
                 $request->validate([
                     'tipe_absen' => 'required',

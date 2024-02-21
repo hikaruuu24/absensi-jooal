@@ -7,6 +7,8 @@ use App\Http\Controllers\HistoryLogController;
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\LaporanAktifitasController;
 use App\Http\Controllers\LaporanAbsensiController;
+use App\Http\Controllers\BankAccountController;
+use App\Http\Controllers\QuotationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -63,4 +65,12 @@ Route::middleware('auth:web')->group(function () {
         'show', 'create', 'store', 'edit', 'update'
     ]);;
 
+    // Document sales
+    Route::get('bank-account', [BankAccountController::class, 'index'])->name('bank-account.index');
+    Route::post('bank-account/{id}', [BankAccountController::class, 'update'])->name('bank-account.update');
+
+    Route::resource('quotation', QuotationController::class);
+    Route::post('detail-quotation', [QuotationController::class, 'detailQuotation'])->name('detail-quotation');
+    Route::delete('detail-quotation/{id}', [QuotationController::class, 'detailQuotationDestroy'])->name('detail-quotation.destroy');
+    Route::get('generate-pdf-quotation/{id}', [QuotationController::class, 'generatePDF'])->name('generate-pdf-quotation');
 });
