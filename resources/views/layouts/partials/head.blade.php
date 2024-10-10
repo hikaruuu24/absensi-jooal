@@ -2,8 +2,6 @@
 <title>{{($page_title ?? '') . ' - ' .  env('APP_NAME')}} </title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-<meta content="Themesbrand" name="author" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <!-- App favicon -->
