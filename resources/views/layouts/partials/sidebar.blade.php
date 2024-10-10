@@ -35,8 +35,10 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{route('quotation.index')}}" key="t-basic-tables">Quotation</a></li>
-                        <li><a href="tables-basic.html" key="t-basic-tables">Invoice</a></li>
+                        <!-- <li><a href="tables-basic.html" key="t-basic-tables">Invoice</a></li> -->
+                        @can('document-sales')
                         <li><a href="{{route('bank-account.index')}}" key="t-basic-tables">Bank Account</a></li>
+                        @endcan
                     </ul>
                 </li>
 

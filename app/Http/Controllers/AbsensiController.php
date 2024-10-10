@@ -17,7 +17,7 @@ class AbsensiController extends Controller
     {
         $data['page_title'] = "Absensi";
         $data['breadcumb'] = "Absensi";
-        $data['absensi'] = Absensi::where('user_id', auth()->user()->id)->get();
+        $data['absensi'] = Absensi::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
         $data['absensi_all'] = Absensi::orderBy('id', 'desc')->get();
 
         $today = date('Y-m-d');

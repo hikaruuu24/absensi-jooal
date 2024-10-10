@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class DetailQuotation extends Model
 {
     use HasFactory;
+
+    
 }
