@@ -49,6 +49,37 @@
                 </div>
 
                 <div class="row">
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <label for="dp">Dp (%)</label>
+                            <input disabled id="dp" name="dp" type="text" inputmode="numeric" class="form-control" placeholder="Ex:10" value="{{$quotation->dp}}">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <label for="sisa_dp">Sisa Dp (%)</label>
+                            <input disabled id="sisa_dp" name="sisa_dp" type="text" inputmode="numeric" class="form-control" placeholder="Ex:10" value="{{$quotation->sisa_dp}}">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <label for="note_dp">Notes Dp</label>
+                            <textarea disabled class="form-control" name="note_dp" id="note_dp">{{$quotation->note_dp}}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <label for="note_sisa_dp">Notes Dp</label>
+                            <textarea disabled class="form-control" name="note_sisa_dp" id="note_sisa_dp">{{$quotation->note_sisa_dp}}</textarea>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
                     <div class="col-lg-12">
                         <div class="table-responsive mt-3">
                             <table class="table table-hover datatable dt-responsive nowrap" id="detailQuotation"
@@ -70,7 +101,7 @@
                                         <tr>
                                             <td>{{$loop->iteration}}</td>
                                             <td>{{$item->item}}</td>
-                                            <td>{{$item->amount}}</td>
+                                            <td>{{ number_format($item->amount,0)}}</td>
                                             <td>{{$item->markup}}%</td>
                                             <td>{{$item->description}}</td>
                                             <td>

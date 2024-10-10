@@ -362,6 +362,35 @@
             width: 30%;
         }
 
+        /* Style for the row */
+        .row {
+            margin-left: -15px;
+            margin-right: -15px;
+            /* Add custom padding or margins if needed */
+            padding-top: 10px;
+        }
+
+        /* Style for full-width column */
+        .col-lg-12 {
+            padding-left: 15px;
+            padding-right: 15px;
+            background-color: #f8f9fa;  /* Example background color */
+            /* Add any custom styles you want */
+            text-align: center;
+            border: 1px solid #ddd;     /* Example border */
+            padding: 20px;
+        }
+
+        /* Custom CSS for .col-lg-4 */
+        .col-lg-4 {
+            padding: 15px;           /* Adds padding inside the column */
+            background-color: #f0f0f0; /* Example background color */
+            border: 1px solid #ccc;  /* Adds a border to the column */
+            text-align: center;      /* Centers text inside the column */
+            margin-bottom: 15px;     /* Optional bottom margin for spacing between rows */
+        }
+
+
     </style>
 </head>
 
@@ -425,13 +454,27 @@
                     <tr>
                         <td style="text-align: center;">{{ $loop->iteration }}</td>
                         <td style="text-align: center;">{{$q->item}}</td>
-                        <td style="text-align: center;">{{($q->markup > 0) ? number_format($q->amount + (($q->amount / $q->markup) * 100 )) : $q->markup}}</td>
+                        <td style="text-align: center;">{{ number_format($q->amount + ($q->amount  * $q->discount / 100),0) }}</td>
+
                         <td style="text-align: center;">{{$q->description}}</td>
                     </tr>
                     @endforeach
+                    <tr>
+                        <td style="text-align: left;">Pembayaran</td>
+                        <td style="text-align: center;">{{ $quotation->dp }}%</td>
+                        <td style="text-align: center;">{{ number_format($q->amount * $quotation->dp/100,0) }}</td>
+                        <td style="text-align: center;">{{ $quotation->note_dp }}</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"></td>
+                        <td style="text-align: center;">{{ $quotation->sisa_dp }}%</td>
+                        <td style="text-align: center;">{{ number_format($q->amount * $quotation->sisa_dp/100,0) }}</td>
+                        <td style="text-align: center;">{{ $quotation->note_dp }}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
+        
 
         <div class="employee-information" style="margin-top:50px !important;">
             <p style="font-size: 10">Notes</p>

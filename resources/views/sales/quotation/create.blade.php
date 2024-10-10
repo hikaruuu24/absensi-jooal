@@ -49,6 +49,34 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label for="dp">Dp (%)</label>
+                                <input id="dp" name="dp" type="text" inputmode="numeric" class="form-control" placeholder="Ex:10">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label for="sisa_dp">Sisa Dp (%)</label>
+                                <input id="sisa_dp" name="sisa_dp" type="text" inputmode="numeric" class="form-control" placeholder="Ex:90">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label for="note_dp">Notes Dp</label>
+                                <textarea class="form-control" rows="6" name="note_dp" id="note_dp" placeholder="Ex:pada saat quotation di setujui"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label for="note_sisa_dp">Notes Sisa Dp</label>
+                                <textarea class="form-control" rows="6" name="note_sisa_dp" id="note_sisa_dp" placeholder="Ex:pada saat setelah foto resi dan konfirmasi kepada jasa pengiriman"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
 
 
                     <div class="row mt-4">

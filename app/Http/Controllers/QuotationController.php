@@ -57,6 +57,10 @@ class QuotationController extends Controller
             $quotation->no_telepon = $request->no_telepon;
             $quotation->email = $request->email;
             $quotation->notes = $request->notes;
+            $quotation->dp = $request->dp;
+            $quotation->sisa_dp = $request->sisa_dp;
+            $quotation->note_dp = $request->note_dp;
+            $quotation->note_sisa_dp = $request->note_sisa_dp;
             $quotation->save();
             
 
